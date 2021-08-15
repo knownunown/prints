@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+file=""
+vars=()
+while getopts ":D:i:" opt; do
+    case $opt in
+        D)
+            vars+=("$OPTARG")
+            ;;
+        i)
+            file="$OPTARG"
+            ;;
+        \?)
+            echo "unknown argument" >&2
+            exit 1
+            ;;
+        :)
+            echo "-$OPTARG requires an argument" >&2
+            exit 1
+            ;;
+    esac
+done
+
+[[ -z "$file" ]] && {
+    echo "specify an input file with -i"
+    exit 1
+}
+
+openscad $file$(echo -n "${vars[@]}" | sed "s/^/ /; s/ / -D /g") \
+         --export-format binstl \
+         -o ${file%%.scad}$(echo -n "${vars[@]}" | sed 's/^/_/; s/=/_/g; s/ /-/g').stl

@@ -13,4 +13,5 @@
 !*.svg
 
 # tooling
-!*.sh
+!bin/
+!bin/mkstl
