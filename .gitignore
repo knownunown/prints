@@ -1,0 +1,16 @@
+*
+
+!.gitignore
+!README.md
+
+# nix
+!.envrc
+!flake.nix
+!flake.lock
+
+# models
+!*.scad
+!*.svg
+
+# tooling
+!*.sh
